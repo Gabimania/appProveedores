@@ -9,6 +9,11 @@ public class Main {
         AlmacenController almacen = new AlmacenController();
         almacen.nuevoProveedor("345", "Carne", "avenida X", "Vigo", "Pontevedra");
         System.out.println(almacen.toString());
+        almacen.nuevoProveedor("543", "Chapela", "Lugo 10", "Santiago", "Coruña");
+        System.out.println(almacen.toString());
+        almacen.deleteProveedor("543");
+        System.out.println("-------------------------------");
+        System.out.println(almacen.toString());
 
 
     }
