@@ -31,6 +31,46 @@ public class AlmacenController {
 
     }
 
+    public boolean cambiarNombreProveedor(String cif, String name){
+        for(int i= 0; i < proveedorList.size(); i++){
+            if (cif.equals(proveedorList.get(i).getCif())) {
+                proveedorList.get(i).setName(name);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean cambiarDireccionProveedor(String cif, String direccion){
+        for(int i= 0; i < proveedorList.size(); i++){
+            if (cif.equals(proveedorList.get(i).getCif())) {
+                proveedorList.get(i).setDireccion(direccion);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean cambiarLocalidadProveedor(String cif, String localidad){
+        for(int i= 0; i < proveedorList.size(); i++){
+            if (cif.equals(proveedorList.get(i).getCif())) {
+                proveedorList.get(i).setLocalidad(localidad);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean cambiarProvinciaProveedor(String cif, String provincia){
+        for(int i= 0; i < proveedorList.size(); i++){
+            if (cif.equals(proveedorList.get(i).getCif())) {
+                proveedorList.get(i).setProvincia(provincia);
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return "AlmacenController{" +"\n"+

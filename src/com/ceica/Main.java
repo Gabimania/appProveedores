@@ -14,6 +14,13 @@ public class Main {
         almacen.deleteProveedor("543");
         System.out.println("-------------------------------");
         System.out.println(almacen.toString());
+        System.out.println("-------------------------------");
+        almacen.cambiarNombreProveedor("345", "Leche");
+        System.out.println(almacen.toString());
+        almacen.cambiarDireccionProveedor("345", "Jaja");
+        almacen.cambiarLocalidadProveedor("345", "Cangas");
+        almacen.cambiarProvinciaProveedor("345", "Lugo");
+        System.out.println(almacen.toString());
 
 
     }
