@@ -12,6 +12,12 @@ public class Pedido {
     public Pedido() {
     }
 
+
+    public Pedido(Proveedor proveedor, Pieza pieza) {
+        this.proveedor = proveedor;
+        this.pieza = pieza;
+    }
+
     public int getId() {
         return id;
     }
