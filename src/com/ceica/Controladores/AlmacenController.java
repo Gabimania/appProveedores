@@ -52,19 +52,17 @@ public class AlmacenController {
     }
 
     public boolean cambiarLocalidadProveedor(String cif, String localidad){
-        for(int i= 0; i < proveedorList.size(); i++){
-            if (cif.equals(proveedorList.get(i).getCif())) {
-                proveedorList.get(i).setLocalidad(localidad);
-                return true;
-            }
-        }
-        return false;
+        proveedorList.stream()
+                .filter(proveedor -> cif.equals(proveedor.getCif()))
+                .findFirst()
+                .ifPresent(proveedor -> proveedor.setLocalidad(localidad));
+        return true;
     }
 
     public boolean cambiarProvinciaProveedor(String cif, String provincia){
-        for(int i= 0; i < proveedorList.size(); i++){
-            if (cif.equals(proveedorList.get(i).getCif())) {
-                proveedorList.get(i).setProvincia(provincia);
+        for(Proveedor proveedor: proveedorList){
+            if (cif.equals(proveedor.getCif())) {
+                proveedor.setProvincia(provincia);
                 return true;
             }
         }
