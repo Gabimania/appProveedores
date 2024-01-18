@@ -1,5 +1,6 @@
 package com.ceica.Controladores;
 
+import com.ceica.Modelos.Categoria;
 import com.ceica.Modelos.Pedido;
 import com.ceica.Modelos.Pieza;
 import com.ceica.Modelos.Proveedor;
@@ -11,11 +12,16 @@ public class AlmacenController {
     private List<Proveedor> proveedorList;
     private List<Pieza> piezaList;
     private List<Pedido> pedidoList;
+    private List<Categoria> categoriasList;
 
     public AlmacenController() {
         proveedorList = new ArrayList<>();
         pedidoList = new ArrayList<>();
         piezaList = new ArrayList<>();
+        categoriasList= new ArrayList<>();
+        categoriasList.add(new Categoria(1,"metal"));
+        categoriasList.add(new Categoria(2,"madera"));
+        categoriasList.add(new Categoria(3, "plastico"));
     }
 
     public boolean nuevoProveedor(String cif, String nombre, String direccion, String localidad, String provincia) {
@@ -70,6 +76,29 @@ public class AlmacenController {
             }
         }
         return false;
+    }
+
+    public boolean nuevaPieza(String name, String color, double precio, int idcategoria){
+        Pieza pieza = new Pieza(name, color, precio);
+        pieza.setCategoría(getCategoriaById(idcategoria));
+        piezaList.add(pieza);
+        return true;
+    }
+
+    public boolean cambiarPrecioPieza(int id, double precio){
+        for (Pieza pieza: piezaList){
+            if (id == pieza.getId()){
+                pieza.setPrecio(precio);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Categoria getCategoriaById(int id){
+       return categoriasList.stream()
+               .filter(categoria -> categoria.getId()==id).
+               findFirst().get();
     }
 
     @Override

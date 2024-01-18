@@ -21,6 +21,18 @@ public class Main {
         almacen.cambiarLocalidadProveedor("345", "Cangas");
         almacen.cambiarProvinciaProveedor("345", "Lugo");
         System.out.println(almacen.toString());
+        almacen.nuevaPieza("tornillos", "gris", 4.5, 1);
+
+
+        almacen.cambiarPrecioPieza(0,10.10);
+
+        almacen.nuevaPieza("ladrillo", "rojo", 3, 2);
+        almacen.cambiarPrecioPieza(1, 300);
+        System.out.println(almacen.toString());
+
+
+
+
 
 
     }
