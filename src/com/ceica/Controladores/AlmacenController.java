@@ -23,6 +23,14 @@ public class AlmacenController {
         categoriasList.add(new Categoria(3, "plastico"));
     }
 
+    /**
+     * @param cif
+     * @param nombre
+     * @param direccion
+     * @param localidad
+     * @param provincia
+     * @return Crear nuevo proveedor y se a la lista de proveedores
+     */
     public boolean nuevoProveedor(String cif, String nombre, String direccion, String localidad, String provincia) {
         Proveedor p = new Proveedor(nombre,cif);
         p.setDireccion(direccion);
@@ -31,11 +39,20 @@ public class AlmacenController {
         return proveedorList.add(p);
     }
 
+    /**
+     * @param cif
+     * @return Se elimina proveedor a través del cip
+     */
     public boolean deleteProveedor(String cif) {
        return proveedorList.removeIf(proveedor -> cif.equals(proveedor.getCif()));
 
     }
 
+    /**
+     * @param cif
+     * @param name
+     * @return Se cambia el nombre del proveedor mediante el cip
+     */
     public boolean cambiarNombreProveedor(String cif, String name){
         for(int i= 0; i < proveedorList.size(); i++){
             if (cif.equals(proveedorList.get(i).getCif())) {
@@ -46,6 +63,11 @@ public class AlmacenController {
         return false;
     }
 
+    /**
+     * @param cif
+     * @param direccion
+     * @return Cambio de la dirección del proveedor mediante cip
+     */
     public boolean cambiarDireccionProveedor(String cif, String direccion){
         for(int i= 0; i < proveedorList.size(); i++){
             if (cif.equals(proveedorList.get(i).getCif())) {
@@ -56,6 +78,11 @@ public class AlmacenController {
         return false;
     }
 
+    /**
+     * @param cif
+     * @param localidad
+     * @return Cambio de la localidad del proveedor a través del cip
+     */
     public boolean cambiarLocalidadProveedor(String cif, String localidad){
         return proveedorList.stream()
                 .filter(proveedor -> cif.equals(proveedor.getCif()))
@@ -67,6 +94,11 @@ public class AlmacenController {
                 .orElse(false);
     }
 
+    /**
+     * @param cif
+     * @param provincia
+     * @return Cambio de la provincia del proveedor a través del cip
+     */
     public boolean cambiarProvinciaProveedor(String cif, String provincia){
         for(Proveedor proveedor: proveedorList){
             if (cif.equals(proveedor.getCif())) {
@@ -77,6 +109,13 @@ public class AlmacenController {
         return false;
     }
 
+    /**
+     * @param name
+     * @param color
+     * @param precio
+     * @param idcategoria
+     * @return Se crea una pieza con sus parámetros y se añade a la lista de piezas
+     */
     public boolean nuevaPieza(String name, Color color, double precio, int idcategoria){
         Pieza pieza = new Pieza(name, color.toString(), precio);
         pieza.setCategoría(getCategoriaById(idcategoria));
@@ -84,6 +123,11 @@ public class AlmacenController {
         return true;
     }
 
+    /**
+     * @param id
+     * @param precio
+     * @return Se cambia el precio de la pieza mediante el id
+     */
     public boolean cambiarPrecioPieza(int id, double precio){
         for (Pieza pieza: piezaList){
             if (id == pieza.getId()){
@@ -94,12 +138,22 @@ public class AlmacenController {
         return false;
     }
 
+    /**
+     * @param id
+     * @return Se obtiene una categoría en cuestión mediante el paso de un id por parámetro
+     */
     private Categoria getCategoriaById(int id){
        return categoriasList.stream()
                .filter(categoria -> categoria.getId()==id).
                findFirst().get();
     }
 
+    /**
+     * @param cif
+     * @param idPieza
+     * @param cantidad
+     * @return Creación de pedido
+     */
     public String nuevoPedido(String cif, int idPieza, int cantidad){
         Proveedor proveedor = getProveedorByCif(cif);
         if(proveedor != null){
@@ -120,6 +174,10 @@ public class AlmacenController {
 
     }
 
+    /**
+     * @param id
+     * @return Comprobar que una pieza existe en la lista de piezas
+     */
     private Pieza getPiezaById(int id){
         for (int i = 0; i <piezaList.size(); i++) {
             if (piezaList.get(i).getId()==id){
@@ -130,6 +188,10 @@ public class AlmacenController {
         return null;
     }
 
+    /**
+     * @param cif
+     * @return Comprobar que un proveedor existe en la lista de proveedores
+     */
     private Proveedor getProveedorByCif(String cif){
         for (Proveedor p : proveedorList){
             if(cif.equals(p.getCif())){
@@ -139,6 +201,10 @@ public class AlmacenController {
         return null;
     }
 
+    /**
+     * @param idPieza
+     * @return Obtener lista de todos los pedidos con un mismo id
+     */
     public String getPedidosByPieza(int idPieza){
         List<Pedido> pedidosByPieza = new ArrayList<>();
         for(Pedido pedido: pedidoList){
@@ -155,6 +221,10 @@ public class AlmacenController {
 
     }
 
+    /**
+     * @param cif
+     * @return Ontener todos los pedidos de los proveedores con un mismo id
+     */
     public String getPedidosByProveedor(String cif){
         List<Proveedor> pedidosByProveedor = new ArrayList<>();
         for(Proveedor proveedor: proveedorList){
