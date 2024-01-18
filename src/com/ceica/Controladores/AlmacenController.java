@@ -52,11 +52,14 @@ public class AlmacenController {
     }
 
     public boolean cambiarLocalidadProveedor(String cif, String localidad){
-        proveedorList.stream()
+        return proveedorList.stream()
                 .filter(proveedor -> cif.equals(proveedor.getCif()))
                 .findFirst()
-                .ifPresent(proveedor -> proveedor.setLocalidad(localidad));
-        return true;
+                .map(proveedor -> {
+                    proveedor.setLocalidad(localidad);
+                    return true;
+                })
+                .orElse(false);
     }
 
     public boolean cambiarProvinciaProveedor(String cif, String provincia){
