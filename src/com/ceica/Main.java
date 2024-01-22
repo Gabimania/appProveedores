@@ -42,8 +42,7 @@ public class Main {
         String menuPrincipal = """
                 1.Proveedores
                 2.Piezas
-                3.Pedidos
-                4.Salir
+                3.Salir
                 """;
         do {
             System.out.println(menuPrincipal);
@@ -56,15 +55,13 @@ public class Main {
                     subMenuPedidos(leer,almacen);
                     break;
                 case "3":
-                    break;
-                case "4":
                     System.out.println("Saliendo...");
                     break;
                 default:
                     System.out.println("Opción no válida");
             }
 
-        } while (!"4".equals(op));
+        } while (!"3".equals(op));
 
     }
 
@@ -134,8 +131,8 @@ public class Main {
                 1.Nueva Pieza
                 2.Cambiar precio de la pieza
                 3.Realizar un nuevo pedido
-                4.Obtener pedido por pieza
-                5.Volver al menu principañ
+                4.Obtener pedidos por pieza
+                5.Volver al menu principal
                 """;
 
         do{
