@@ -201,12 +201,22 @@ public class AlmacenController {
         return null;
     }
 
+    public boolean comprobarCif(String cif){
+        for (Proveedor p : proveedorList){
+            if(cif.equals(p.getCif())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @param idPieza
      * @return Obtener lista de todos los pedidos con un mismo id
      */
     public String getPedidosByPieza(int idPieza){
         List<Pedido> pedidosByPieza = new ArrayList<>();
+        
         for(Pedido pedido: pedidoList){
             if(pedido.getPieza().getId()==idPieza){
                 pedidosByPieza.add(pedido);
@@ -238,6 +248,10 @@ public class AlmacenController {
             return "No hay pedidos de este proveedor";
         }
     }
+    public String veerProvedores() {
+        return proveedorList.toString();
+    }
+
 
     @Override
     public String toString() {
@@ -247,6 +261,8 @@ public class AlmacenController {
                 ", pedidoList=" + pedidoList +"\n"+
                 '}';
     }
+
+
 }
 
 

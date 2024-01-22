@@ -11,9 +11,10 @@ public class Proveedor {
     public Proveedor() {
     }
 
-    public Proveedor(String name, String cif) {
-        this.name = name;
+    public Proveedor(String cif, String name) {
         this.cif = cif;
+        this.name = name;
+
     }
 
     public int getId() {
