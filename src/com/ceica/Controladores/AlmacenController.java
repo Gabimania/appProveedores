@@ -19,9 +19,8 @@ public class AlmacenController {
         piezaList = new ArrayList<>();
         categoriasList = new ArrayList<>();
         proveedorList = Proveedor.getProveedores();
-        categoriasList.add(new Categoria(1, "metal"));
-        categoriasList.add(new Categoria(2, "madera"));
-        categoriasList.add(new Categoria(3, "plastico"));
+        categoriasList = Categoria.getCategorias();
+        piezaList = Pieza.getPiezas();
     }
 
     /**
@@ -32,14 +31,11 @@ public class AlmacenController {
      * @param provincia
      * @return Crear nuevo proveedor y se a la lista de proveedores
      */
-    public boolean nuevoProveedor(String cif, String nombre, String direccion, String localidad, String provincia) {
+    public boolean nuevoProveedor(String nombre, String direccion, String localidad, String provincia,String cif) {
         Proveedor p = new Proveedor(nombre, cif);
-        p.setDireccion(direccion);
-        p.setLocalidad(localidad);
-        p.setProvincia(provincia);
-        if (Proveedor.insertar(p)) {
+        if (p.insertar("(nombre,direccion,localidad,provincia,cif) values(?,?,?,?,?)",nombre,direccion, localidad,provincia,cif)) {
             return proveedorList.add(p);
-        } else {
+        }else {
             return false;
         }
 
@@ -51,7 +47,8 @@ public class AlmacenController {
      */
     public boolean deleteProveedor(String cif) {
        // return proveedorList.removeIf(proveedor -> cif.equals(proveedor.getCif()));
-        if(Proveedor.eliminarProveedor(cif)){
+        Proveedor proveedor = new Proveedor();
+        if(proveedor.borrar("cif = ?", cif)){
             proveedorList= Proveedor.getProveedores();
             return true;
         }else{
@@ -66,7 +63,8 @@ public class AlmacenController {
      * @return Se cambia el nombre del proveedor mediante el cip
      */
     public boolean cambiarNombreProveedor(String cif, String name) {
-        if (Proveedor.editarnombreProveedor(cif, name)) {
+        Proveedor proveedor= new Proveedor();
+        if (proveedor.actualizar("nombre = ? where cif = ?",name, cif)) {
             proveedorList=Proveedor.getProveedores();
             return true;
             /*
@@ -140,8 +138,12 @@ public class AlmacenController {
     public boolean nuevaPieza(String name, Color color, double precio, int idcategoria) {
         Pieza pieza = new Pieza(name, color.toString(), precio);
         pieza.setCategoría(getCategoriaById(idcategoria));
-        piezaList.add(pieza);
-        return true;
+        if(pieza.insertar("(nombre, color, precio, idcategoria) values(?,?,?,?)",name,color.toString(),precio,idcategoria)){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     /**

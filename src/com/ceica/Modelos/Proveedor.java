@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Proveedor {
+public class Proveedor extends ModeloBase {
     private int id;
     private String name;
     private String cif;
@@ -15,7 +15,7 @@ public class Proveedor {
     private String localidad;
     private String provincia;
 
-    public Proveedor() {
+    public Proveedor()  {
     }
 
     public Proveedor(String cif, String name) {
@@ -46,7 +46,7 @@ public class Proveedor {
 
     }
 
-    public static boolean editarnombreProveedor(String cif, String name) {
+    /*public static boolean editarnombreProveedor(String cif, String name) {
         Connection con = Conexion.conectar();
         String sql = "update provedor set nombre=? where cif=?";
         try {
@@ -64,9 +64,9 @@ public class Proveedor {
             //throw new RuntimeException(e);
             return false;
         }
-    }
+    }*/
 
-    public static boolean eliminarProveedor(String cif) {
+   /* public static boolean eliminarProveedor(String cif) {
         Connection con = Conexion.conectar();
         String sql = "delete from provedor where cif = ?";
         try {
@@ -83,7 +83,7 @@ public class Proveedor {
             //throw new RuntimeException(e);
             return false;
         }
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -173,5 +173,10 @@ public class Proveedor {
                 ", localidad='" + localidad + '\'' + "\n"+
                 ", provincia='" + provincia + '\'' + "\n"+
                 '}';
+    }
+
+    @Override
+    protected String getNombreTabla() {
+        return "provedor";
     }
 }

@@ -172,7 +172,7 @@ public class Main {
                     System.out.println("Introduce la categoría: 1.metal 2.madera 3.plastico");
                     int categoria = leer.nextInt();
                     leer.nextLine();
-                    almacen.nuevaPieza(nombre,color,precio,categoria);
+                   almacen.nuevaPieza(nombre,color,precio,categoria);
                     break;
                 case "2":
                     System.out.println("Introduce el id de la pieza");
